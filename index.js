@@ -252,15 +252,22 @@ function addTask(event) {
     }
 }
 
-// Function to toggle the sidebar visibility
+// Function to toggle the visibility of the sidebar
 function toggleSidebar(show) {
   elements.showSideBarBtn.style.display = show ? 'none' : 'block';
   elements.sideBar.style.display = show ? 'block' : 'none';
   elements.hideSideBarBtn.style.display = show ? 'block' : 'none';
 }
 
-function toggleTheme() {
- 
+// Function to toggle between light and dark theme
+function toggleTheme(event) {
+  const isLightTheme = document.body.classList.toggle("light-theme");
+  // Set the checkbox state based on the theme (checked if light theme is applied)
+  elements.themeSwitch.checked = isLightTheme ? true : false;
+// Change the logo image source based on the theme
+  elements.logo.src = elements.logo.src.includes("dark") 
+      ? elements.logo.src.replace("dark", "light") 
+      : elements.logo.src.replace("light", "dark");
 }
 
 
