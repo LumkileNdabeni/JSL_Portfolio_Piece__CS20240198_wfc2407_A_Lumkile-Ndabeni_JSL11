@@ -286,21 +286,28 @@ function openEditTaskModal(task) {
   toggleModal(true, elements.editTaskModal);
 }
 
+// Function to save changes made to a task
 function saveTaskChanges(taskId) {
-  // Get new user inputs
-  
+  // Check if the task ID is provided. If not, do nothing and exit the function.
+  if (!taskId) return; // If there's no task ID, do nothing and exit.
 
-  // Create an object with the updated task details
+  // Create an updated task object with the latest data from the form fields
+  const updatedTask = {
+    id: taskId, // The ID of the task to be updated
+    title: elements.editTaskTitleInput.value, 
+    description: elements.editTaskDescInput.value, 
+    status: elements.editSelectStatus.value, 
+    board: activeBoard, 
+  };
 
+  // Call the putTask function to update the task data in local storage
+  putTask(taskId, updatedTask); 
 
-  // Update task using a hlper functoin
- 
-
-  // Close the modal and refresh the UI to reflect the changes
-
-  refreshTasksUI();
+  // Close the edit task modal after saving the changes
+  toggleModal(false, elements.editTaskModal); 
+  // Refresh the UI to reflect the updated task data
+  refreshTasksUI(); 
 }
-
 /*************************************************************************************************************************************************/
 
 document.addEventListener('DOMContentLoaded', function() {
