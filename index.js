@@ -234,8 +234,8 @@ function toggleModal(show, modal = elements.modalWindow) {
 function addTask(event) {
   event.preventDefault(); 
 
-  //Assign user input to the task object
-  const task = { 
+// Create a task object with the input values from the form  
+ const task = { 
     title: elements.titleInput.value,
     description: elements.descInput.value,
     status: elements.statusInput.value,
@@ -245,16 +245,18 @@ function addTask(event) {
     const newTask = createNewTask(task);
     if (newTask) {
       addTaskToUI(newTask);
-      toggleModal(false);
+      toggleModal(false, elements.modalWindow); // Close the modal by setting its display to 'none'
       elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
       event.target.reset();
       refreshTasksUI();
     }
 }
 
-
+// Function to toggle the sidebar visibility
 function toggleSidebar(show) {
- 
+  elements.showSideBarBtn.style.display = show ? 'none' : 'block';
+  elements.sideBar.style.display = show ? 'block' : 'none';
+  elements.hideSideBarBtn.style.display = show ? 'block' : 'none';
 }
 
 function toggleTheme() {
