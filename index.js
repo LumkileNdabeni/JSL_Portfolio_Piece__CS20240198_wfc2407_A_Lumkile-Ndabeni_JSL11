@@ -272,20 +272,18 @@ function toggleTheme(event) {
 
 
 
+// Function to open the edit task modal and populate it with the task's current details
 function openEditTaskModal(task) {
-  // Set task details in modal inputs
-  
+  // Populate the edit task modal with the current task's title, description, and status
+  elements.editTaskTitleInput.value = task.title; 
+  elements.editTaskDescInput.value = task.description; 
+  elements.editSelectStatus.value = task.status; 
 
-  // Get button elements from the task modal
+  // Store the task ID in a global variable to reference it later for saving or deleting
+  currentTaskId = task.id;
 
-
-  // Call saveTaskChanges upon click of Save Changes button
- 
-
-  // Delete task using a helper function and close the task modal
-
-
-  toggleModal(true, elements.editTaskModal); // Show the edit task modal
+  // Display the modal by toggling its visibility (set to 'true' for showing the modal)
+  toggleModal(true, elements.editTaskModal);
 }
 
 function saveTaskChanges(taskId) {
