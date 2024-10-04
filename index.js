@@ -258,7 +258,7 @@ function toggleTheme(event) {
 function openEditTaskModal(task) {
   elements.editTaskTitleInput.value = task.title;
   elements.editTaskDescInput.value = task.description;
-  const selectedStatus = elements.editSelectStatus.querySelector(option[value="${task.status}"]);
+  const selectedStatus = elements.editSelectStatus.querySelector(`option[value="${task.status}"]`);
   if (selectedStatus) {
     selectedStatus.selected = true;
   }
