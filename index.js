@@ -133,7 +133,7 @@ function addTaskToUI(task) {
   const column = document.querySelector(`.column-div[data-status="${task.status}"]`);
   
   if (!column) {
-    // Added quotes around error message strings
+    // Added temperal literals around error message strings
     console.error(`Column not found for status: ${task.status}`);
     return;
   }
@@ -161,30 +161,33 @@ function addTaskToUI(task) {
 
 // Sets up event listeners for various elements
 function setupEventListeners() {
-  const cancelEditBtn = document.getElementById('cancel-edit-btn');
+  const cancelEditBtn = document.getElementById('cancel-edit-btn'); // Event listener for the 'Cancel Edit' button in the edit task modal
+  // When the 'Cancel Edit' button is clicked, the modal will close without saving changes
   cancelEditBtn.addEventListener("click", () => toggleModal(false, elements.editTaskModal));
 
+  // Event listener for the 'Cancel Add Task' button in the new task modal
   const cancelAddTaskBtn = elements.cancelAddTaskBtn;
-  cancelAddTaskBtn.addEventListener("click", () => {
+  cancelAddTaskBtn.addEventListener("click", () => { // When the 'Cancel Add Task' button is clicked, the new task modal will close
     toggleModal(false);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
   });
 
+  // Event listener for clicks on the filter overlay (to close the modal when clicked outside)
   elements.filterDiv.addEventListener('click', () => {
-    toggleModal(false);
+    toggleModal(false); 
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
   });
-
+// Event listener for the 'Sidebar'
   elements.hideSideBarBtn.addEventListener("click", () => toggleSidebar(false));
-  elements.showSideBarBtn.addEventListener("click", () => toggleSidebar(true));
-
-  elements.themeSwitch.addEventListener('change', toggleTheme);
-
+  elements.showSideBarBtn.addEventListener("click", () => toggleSidebar(true)); 
+// Event listener for the theme switch to change the app's theme
+  elements.themeSwitch.addEventListener('change', toggleTheme); 
+// Event listener for the 'Add New Task' button
   elements.addNewTaskBtn.addEventListener('click', () => {
     toggleModal(true);
     elements.filterDiv.style.display = 'block'; // Also show the filter overlay
   });
-
+// Event listener for form submission on the new task modal
   elements.modalWindow.addEventListener('submit', (event) => {
     addTask(event);
   });
@@ -238,17 +241,26 @@ function addTask(event) {
 
 // Function to toggle the sidebar visibility
 function toggleSidebar(show) {
+   // If 'show' is true, hide the 'Show Sidebar' button and display the sidebar
   elements.showSideBarBtn.style.display = show ? "none" : "block";
+  // If 'show' is false, show the 'Show Sidebar' button and hide the sidebar
   elements.sideBar.style.display = show ? "block" : "none";
 }
 
 // Function to switch the theme
 function toggleTheme(event) {
+  // Toggle the 'light-theme' class on the document body to switch between themes
   document.body.classList.toggle("light-theme");
+  // Check if the 'light-theme' class is present on the body (i.e., is the theme light?)
   const isLightTheme = document.body.classList.contains("light-theme");
 
+  // Save the current theme preference in localStorage as either 'enabled' or 'disabled'
+  // 'enabled' for light theme, 'disabled' for dark theme
   localStorage.setItem("light-theme", isLightTheme ? "enabled" : "disabled");
+  // Update the theme switch checkbox to reflect the current theme status
   elements.themeSwitch.checked = isLightTheme;
+  // Update the logo's image source based on the current theme
+  // This switches the logo to either a light or dark version depending on the theme
   elements.logo.src = elements.logo.src
     .replace(window.location.origin, ".")
     .replace(isLightTheme ? "dark" : "light", isLightTheme ? "light" : "dark");
@@ -262,8 +274,8 @@ function openEditTaskModal(task) {
   if (selectedStatus) {
     selectedStatus.selected = true;
   }
-
-  currentTaskId = task.id; // Store the task ID for saving changes or deleting
+  // Store the current task's ID in a variable so it can be used later when saving changes or deleting the task
+  currentTaskId = task.id; 
   toggleModal(true, elements.editTaskModal);
 }
 
