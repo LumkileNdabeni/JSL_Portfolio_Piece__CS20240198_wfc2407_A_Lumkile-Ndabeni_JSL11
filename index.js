@@ -69,7 +69,7 @@ function displayBoards(boards) {
     const boardElement = document.createElement("button");
     boardElement.textContent = board;
     boardElement.classList.add("board-btn");
-    boardElement.addEventListener("click", () => {
+    boardElement.addEventListener("click", () => { 
       elements.headerBoardName.textContent = board;
       filterAndDisplayTasksByBoard(board);
       activeBoard = board; // Assign active board
@@ -95,7 +95,7 @@ function filterAndDisplayTasksByBoard(boardName) {
     const tasksContainer = document.createElement("div");
     column.appendChild(tasksContainer);
 
-    filteredTasks.filter(task => task.status === status).forEach(task => {
+    filteredTasks.filter(task => task.status === status).forEach(task => { // Corrected comparison from '=' to "==="
       const taskElement = document.createElement("div");
       taskElement.classList.add("task-div");
       taskElement.textContent = task.title;
@@ -120,9 +120,9 @@ function refreshTasksUI() {
 function styleActiveBoard(boardName) {
   document.querySelectorAll('.board-btn').forEach(btn => {
     if (btn.textContent === boardName) {
-      btn.classList.add('active');
+      btn.classList.add('active'); // Added classList
     } else {
-      btn.classList.remove('active');
+      btn.classList.remove('active'); // Added classList
     }
   });
 }
@@ -178,7 +178,7 @@ function setupEventListeners() {
     elements.filterDiv.style.display = 'none'; // Also hide the filter overlay
   });
 // Event listener for the 'Sidebar'
-  elements.hideSideBarBtn.addEventListener("click", () => toggleSidebar(false));
+  elements.hideSideBarBtn.addEventListener("click", () => toggleSidebar(false)); // Corrected eventListeners
   elements.showSideBarBtn.addEventListener("click", () => toggleSidebar(true)); 
 // Event listener for the theme switch to change the app's theme
   elements.themeSwitch.addEventListener('change', toggleTheme); 
@@ -193,7 +193,7 @@ function setupEventListeners() {
   });
 
   // Save task changes listener
-  elements.saveTaskChangesBtn.addEventListener('click', () => {
+  elements.saveTaskChangesBtn.addEventListener('click', () => { // Corredcted eventListener
     if (currentTaskId) {
       saveTaskChanges(currentTaskId);  // Pass the current task ID
     }
@@ -211,7 +211,7 @@ function setupEventListeners() {
 
 // Toggles tasks modal
 function toggleModal(show, modal = elements.modalWindow) {
-  modal.style.display = show ? 'block' : 'none';
+  modal.style.display = show ? 'block' : 'none'; //Corrected logic error ";" to ":"
 }
 
 /*************************************************
