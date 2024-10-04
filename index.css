@@ -50,7 +50,7 @@ body {
   /* border: 5px solid rgb(0, 0, 0); */
   border-right: 0.1px solid #979797;
   /* flex: 0.8; */
-  display: none;
+  display: block;
   flex-direction: column;
   gap: 50px;
   /* padding-left: 50px; */
